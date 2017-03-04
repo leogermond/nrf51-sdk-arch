@@ -9,7 +9,7 @@ license=('custom:nordicsdk', 'custom:ant', 'LGPL')
 
 _cksum='f012efa'
 _path=nRF5_SDK_${pkgver}_${_cksum}
-source=('https://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v12.x.x/${_path}.zip')
+source=("https://developer.nordicsemi.com/nRF5_SDK/nRF5_SDK_v12.x.x/${_path}.zip")
 md5sums=('f51f879777921f8b4630af3151995d62')
 noextract=(${_path}.zip)
 
