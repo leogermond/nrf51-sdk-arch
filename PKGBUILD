@@ -17,7 +17,7 @@ options=('!strip' 'staticlibs')
 
 prepare() {
 	bsdtar -xf "${srcdir}/${_path}.zip" \
-		--exclude "arm4" --exclude "arm5*" --exclude "*.msi" --exclude "*keil*" --exclude "*iar*" --exclude "*KEIL*" --exclude "*IAR*"
+		--exclude "arm4" --exclude "arm5*" --exclude "*.msi" --exclude "*keil*" --exclude "*iar*" --exclude "*KEIL*" --exclude "*IAR*" --exclude "*windows*"
 }
 
 package() {
@@ -27,4 +27,10 @@ package() {
 	# Fix broken permissions
 	chmod -R o=g "$pkgdir/opt/$pkgname"
 	find "$pkgdir/opt/$pkgname" -perm 744 -exec chmod 755 {} +
+
+	# generate correct makefile
+	cat > $pkgdir/opt/$pkgname/components/toolchain/gcc/Makefile.posix << EOF
+GNU_INSTALL_ROOT := $(dirname $(dirname $(which arm-none-eabi-gcc)))
+GNU_PREFIX := arm-none-eabi
+EOF
 }
